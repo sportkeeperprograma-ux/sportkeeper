@@ -36,7 +36,7 @@ class SecurityConfig(private val jwtFilter: JwtAuthFilter) {
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
         val cfg = CorsConfiguration()
-        cfg.allowedOrigins = listOf("http://localhost:3000") // 👈 tu front
+        cfg.allowedOrigins = listOf("https://68d4073e8d01980008a5e8c1--graceful-custard-358635.netlify.app/") // 👈 tu front
         cfg.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
         cfg.allowedHeaders = listOf("*")
         cfg.allowCredentials = true
