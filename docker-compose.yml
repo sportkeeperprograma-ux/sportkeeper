@@ -1,26 +1,21 @@
 version: "3.9"
-services:
-  db:
-    image: postgres:15
-    environment:
-      POSTGRES_USER: sportkeeper
-      POSTGRES_PASSWORD: sportkeeper
-      POSTGRES_DB: sportkeeper
-    ports: ["5432:5432"]
-    volumes:
-      - db_data:/var/lib/postgresql/data
 
+services:
+  # Opcional: Adminer, puede conectarse a Neon (host externo)
   adminer:
-    image: adminer:4
-    depends_on: [db]
-    ports: ["8081:8080"]
+    image: adminer:latest
+    ports:
+      - "8081:8080"           # http://localhost:8081
 
   backend:
     build: .
-    depends_on: [db]
     environment:
       SPRING_PROFILES_ACTIVE: docker
-    ports: ["8080:8080"]
-
-volumes:
-  db_data:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://ep-royal-grass-ag32b4j0-pooler.c-2.eu-central-1.aws.neon.tech:5432/neondb?sslmode=require
+      SPRING_DATASOURCE_USERNAME: neondb_owner
+      SPRING_DATASOURCE_PASSWORD: npg_mZghrjIa2d7k
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update   # en prod serio: validate + migraciones
+      SPRING_SQL_INIT_MODE: never
+      TZ: Europe/Madrid
+    ports:
+      - "8080:8080"

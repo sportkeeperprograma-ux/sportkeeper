@@ -1,9 +1,9 @@
 # src/main/resources/application-docker.yml
 spring:
   datasource:
-    url: jdbc:postgresql://db:5432/sportkeeper
-    username: sportkeeper
-    password: sportkeeper
+    url: jdbc:postgresql://@ep-delicate-flower-agxw3wwh-pooler.c-2.eu-central-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+    username: neondb_owner
+    password: npg_tj7h0AkHaqDr
     driver-class-name: org.postgresql.Driver   # <-- importante
   jpa:
     hibernate:
