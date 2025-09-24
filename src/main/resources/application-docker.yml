@@ -1,0 +1,19 @@
+# src/main/resources/application-docker.yml
+spring:
+  datasource:
+    url: jdbc:postgresql://db:5432/sportkeeper
+    username: sportkeeper
+    password: sportkeeper
+    driver-class-name: org.postgresql.Driver   # <-- importante
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: 8080
+
+security:
+  jwt:
+    secret: changemechangemechangemechangeme
