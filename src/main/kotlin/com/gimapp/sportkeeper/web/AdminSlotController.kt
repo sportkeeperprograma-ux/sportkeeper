@@ -22,8 +22,8 @@ class AdminSlotController(
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@Valid @RequestBody req: CreateSlotReq): SlotRes {
         require(req.endAt.isAfter(req.startAt)) { "endAt must be after startAt" }
-        val saved = slots.save(TimeSlot(startAt = req.startAt, endAt = req.endAt, capacity = req.capacity, name = req.name, description = req.description))
-        return SlotRes(saved.id!!, saved.startAt, saved.endAt, saved.capacity, saved.name, saved.description)
+        val saved = slots.save(TimeSlot(startAt = req.startAt, endAt = req.endAt, capacity = req.capacity, name = req.name, activity = req.activity, coachId = req.coachId , description = req.description))
+        return SlotRes(saved.id!!, saved.startAt, saved.endAt, saved.capacity, saved.name, saved.activity, saved.coachId, saved.description)
     }
 
     @PutMapping("/{id}")
@@ -36,7 +36,7 @@ class AdminSlotController(
         req.name?.let { s.name = it }
         req.description?.let { s.description = it }
         require(s.endAt.isAfter(s.startAt)) { "endAt must be after startAt" }
-        return SlotRes(s.id!!, s.startAt, s.endAt, s.capacity, s.name, s.description)
+        return SlotRes(s.id!!, s.startAt, s.endAt, s.capacity, s.name, s.activity, s.coachId, s.description)
     }
 
     @DeleteMapping("/{id}")

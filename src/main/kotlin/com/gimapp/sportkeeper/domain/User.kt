@@ -12,6 +12,6 @@ class User(
     @Column(unique = true, nullable = false)
     var email: String = "",
     var password: String = "",       // BCrypt
-    var role: String = "MEMBER",     // MEMBER | ADMIN
-    var status: String = "ACTIVE",
+    var role: Role = Role.MEMBER,     // MEMBER | ADMIN | COACH
+    var status: UserStatus = UserStatus.ACTIVE,
 )

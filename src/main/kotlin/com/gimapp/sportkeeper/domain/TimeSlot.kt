@@ -14,5 +14,14 @@ class TimeSlot(
     var endAt: LocalDateTime = LocalDateTime.now().plusHours(1),
     var capacity: Int = 30,
     var name: String = "",            // 👈 nuevo
-    var description: String = ""      // 👈 nuevo
+    var description: String = "",      // 👈 nuevo
+
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "activity_id")
+    var activity: Activity,
+
+    // Profesor que imparte
+    @Column(name = "coach_id", nullable = false)
+    var coachId: UUID?
 )

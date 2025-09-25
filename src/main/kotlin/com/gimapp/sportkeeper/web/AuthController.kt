@@ -1,5 +1,6 @@
 package com.gimapp.sportkeeper.web
 
+import com.gimapp.sportkeeper.domain.Role
 import com.gimapp.sportkeeper.domain.User
 import com.gimapp.sportkeeper.infra.JwtUtil
 import com.gimapp.sportkeeper.repo.UserRepository
@@ -25,7 +26,7 @@ class AuthController(
     @ResponseStatus(HttpStatus.CREATED)
     fun register(@RequestBody r: RegisterReq) {
         require(users.findByEmail(r.email) == null) { "Email already exists" }
-        users.save(User(email = r.email, password = pe.encode(r.password), role = "MEMBER"))
+        users.save(User(email = r.email, password = pe.encode(r.password), role = Role.MEMBER))
     }
 
     @PostMapping("/login")

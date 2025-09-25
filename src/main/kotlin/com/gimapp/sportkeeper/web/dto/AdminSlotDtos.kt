@@ -1,5 +1,6 @@
 package com.gimapp.sportkeeper.web.dto
 
+import com.gimapp.sportkeeper.domain.Activity
 import jakarta.validation.constraints.Future
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
@@ -12,6 +13,8 @@ data class CreateSlotReq(
     @field:NotNull @field:Future val endAt: LocalDateTime,
     @field:Min(1) val capacity: Int = 30,
     @field:NotBlank val name: String,             // 👈 nuevo
+    @field:NotNull val activity: Activity,
+    val coachId: UUID? = null,
     val description: String = ""                  // 👈 nuevo
 )
 
@@ -21,6 +24,8 @@ data class UpdateSlotReq(
     val endAt: LocalDateTime? = null,
     @field:Min(1) val capacity: Int? = null,
     val name: String? = null,                     // 👈 nuevo
+    val activity: Activity,
+    val coachId: UUID? = null,
     val description: String? = null               // 👈 nuevo
 )
 
@@ -31,5 +36,7 @@ data class SlotRes(
     val endAt: LocalDateTime,
     val capacity: Int,
     val name: String,          // 👈 nuevo
+    val activity: Activity,
+    val coachId: UUID? = null,
     val description: String    // 👈 nuevo
 )

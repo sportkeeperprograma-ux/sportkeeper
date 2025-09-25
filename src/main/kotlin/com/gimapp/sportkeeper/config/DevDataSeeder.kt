@@ -1,27 +1,14 @@
 package com.gimapp.sportkeeper.config
 
 
-import com.gimapp.sportkeeper.domain.TimeSlot
-import com.gimapp.sportkeeper.repo.TimeSlotRepository
+import com.gimapp.sportkeeper.domain.Role
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import java.time.LocalDateTime
 
 
 @Configuration
 class DevDataSeeder {
-    @Bean
-    fun seedSlots(timeSlotRepository: TimeSlotRepository) = CommandLineRunner {
-        if (timeSlotRepository.count() == 0L) {
-            val today = LocalDateTime.now().withMinute(0).withSecond(0).withNano(0)
-            val slots = (6..22).map { h ->
-                val start = today.withHour(h)
-                TimeSlot(startAt = start, endAt = start.plusHours(1), capacity = if (h in 18..21) 40 else 30)
-            }
-            timeSlotRepository.saveAll(slots)
-        }
-    }
 
     @Bean
     fun seedAdmin(userRepo: com.gimapp.sportkeeper.repo.UserRepository,
@@ -31,7 +18,21 @@ class DevDataSeeder {
                 com.gimapp.sportkeeper.domain.User(
                     email = "admin@gimapp.local",
                     password = pe.encode("admin123"),
-                    role = "ADMIN"
+                    role = Role.ADMIN
+                )
+            )
+            userRepo.save(
+                com.gimapp.sportkeeper.domain.User(
+                    email = "demoMember@prueba.com",
+                    password = pe.encode("member123"),
+                    role = Role.MEMBER
+                )
+            )
+            userRepo.save(
+                com.gimapp.sportkeeper.domain.User(
+                    email = "demoCoach@prueba.com",
+                    password = pe.encode("coach123"),
+                    role = Role.COACH
                 )
             )
         }

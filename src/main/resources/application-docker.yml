@@ -1,16 +1,21 @@
 # src/main/resources/application-docker.yml
 spring:
+  config:
+    activate:
+      on-profile: docker
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
-    driver-class-name: org.postgresql.Driver   # <-- importante
+    # Por defecto apunta al servicio 'db' de docker-compose.
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://db:5432/sportkeeper}
+    username: ${SPRING_DATASOURCE_USERNAME:sportkeeper}
+    password: ${SPRING_DATASOURCE_PASSWORD:sportkeeper}
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         format_sql: true
+
 server:
   port: 8080
 

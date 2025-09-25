@@ -38,7 +38,7 @@ class SecurityConfig(private val jwtFilter: JwtAuthFilter) {
         val cfg = CorsConfiguration()
         cfg.allowedOrigins = listOf("https://graceful-custard-358635.netlify.app/", "http://localhost:8888") // 👈 tu front
 
-        cfg.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
+        cfg.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
         cfg.allowedHeaders = listOf("*")
         cfg.allowCredentials = true
         val source = UrlBasedCorsConfigurationSource()
